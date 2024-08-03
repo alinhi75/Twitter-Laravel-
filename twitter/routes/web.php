@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\IdeasController;
 
 /*
 
@@ -45,7 +46,9 @@ Controller: Logic
 
 
 
-Route::get('/', [DashboardController::class , 'index']);
+Route::get('/', [DashboardController::class , 'index']) -> name('dashboard');
+Route::post('/idea',[IdeasController::class , 'store']) -> name('idea.create');
+// Route::get('/idea',[DashboardController::class , 'index']) -> name('idea.index');
 
 
 // Route::get('/profile', [ProfileController::class , 'index']);
