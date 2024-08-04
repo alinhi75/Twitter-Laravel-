@@ -48,7 +48,9 @@ Controller: Logic
 
 Route::get('/', [DashboardController::class , 'index']) -> name('dashboard');
 Route::post('/idea',[IdeasController::class , 'store']) -> name('idea.create');
-// Route::get('/idea',[DashboardController::class , 'index']) -> name('idea.index');
+Route::delete('/idea/{id}',[IdeasController::class , 'destroy']) -> name('idea.destroy');
+
+
 
 
 // Route::get('/profile', [ProfileController::class , 'index']);

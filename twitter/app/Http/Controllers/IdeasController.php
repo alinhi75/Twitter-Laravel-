@@ -17,4 +17,10 @@ class IdeasController extends Controller
         ]);
         return redirect() -> route('dashboard') -> with ('success','Idea was added successfully');
     }
+
+    public function destroy($id){
+        $idea = Idea::find($id) -> firstorFail();
+        $idea -> delete();
+        return redirect() -> route('dashboard') -> with ('success','Idea was deleted successfully');
+    }
 }

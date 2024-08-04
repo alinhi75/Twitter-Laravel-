@@ -53,6 +53,14 @@
                                     </a></h5>
                             </div>
                         </div>
+                        <div>
+                            <form method="POST" action="{{ route('idea.destroy', $idea->id) }}">
+                                @csrf
+                                @method('DELETE')
+                                <button class = "btn btn-danger btn-sm"> Delete </button>
+
+                            </form>
+                            </div>
                     </div>
                 </div>
 
@@ -109,7 +117,6 @@
         <div class="mt-3">
             {{ $ideas->links() }}
         </div>
-        <!-- {{ $ideas->links() }} -->
     </div>
     <div class="col-3">
         @include('shared/idea-card')
