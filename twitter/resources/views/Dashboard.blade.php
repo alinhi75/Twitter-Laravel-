@@ -106,6 +106,10 @@
             </div>
         </div>
         @endforeach
+        <div class="mt-3">
+            {{ $ideas->links() }}
+        </div>
+        <!-- {{ $ideas->links() }} -->
     </div>
     <div class="col-3">
         @include('shared/idea-card')
