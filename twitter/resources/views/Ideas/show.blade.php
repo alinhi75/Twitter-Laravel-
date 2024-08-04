@@ -38,9 +38,9 @@
     </div>
     <div class="col-6">
         @include('shared.success-message')
-        @include('shared.submit_idea')
+
         <hr>
-        @foreach($ideas as $idea)
+
         <div class="mt-3">
             <div class="card">
                 <div class="px-3 pt-4 pb-2">
@@ -57,11 +57,9 @@
                             <form method="POST" action="{{ route('idea.destroy', $idea->id) }}">
                                 @csrf
                                 @method('DELETE')
-                                <a  href="{{ route('idea.show',$idea->id)}}">view</a>
-                                <button class = "ms-3 btn btn-danger btn-sm"> Delete </button>
+                                <button class = "btn btn-danger btn-sm"> Delete </button>
 
                             </form>
-
                             </div>
                     </div>
                 </div>
@@ -115,10 +113,7 @@
 
             </div>
         </div>
-        @endforeach
-        <div class="mt-3">
-            {{ $ideas->links() }}
-        </div>
+
     </div>
     <div class="col-3">
         @include('shared/idea-card')

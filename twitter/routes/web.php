@@ -48,7 +48,9 @@ Controller: Logic
 
 Route::get('/', [DashboardController::class , 'index']) -> name('dashboard');
 Route::post('/idea',[IdeasController::class , 'store']) -> name('idea.create');
-Route::delete('/idea/{id}',[IdeasController::class , 'destroy']) -> name('idea.destroy');
+Route::get('/ideas/{idea}',[IdeasController::class , 'show']) -> name('idea.show');
+Route::delete('/idea/{idea}',[IdeasController::class , 'destroy']) -> name('idea.destroy');
+
 
 
 
