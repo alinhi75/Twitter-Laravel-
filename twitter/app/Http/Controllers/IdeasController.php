@@ -8,6 +8,10 @@ use App\Models\Idea;
 class IdeasController extends Controller
 {
     public function store(){
+
+        request() -> validate([
+            'idea' => 'required|min:3|max:240'
+        ]);
         $idea = Idea::create([
             'content' => request()->get('idea','')
         ]);
