@@ -57,6 +57,7 @@
                             <form method="POST" action="{{ route('idea.destroy', $idea->id) }}">
                                 @csrf
                                 @method('DELETE')
+                                <a  href="{{ route('idea.edit',$idea->id)}}">Edit</a>
                                 <a  href="{{ route('idea.show',$idea->id)}}">view</a>
                                 <button class = "ms-3 btn btn-danger btn-sm"> Delete </button>
 
