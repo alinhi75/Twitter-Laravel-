@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\IdeasController;
+use App\Http\Controllers\CommentController;
 
 /*
 
@@ -52,11 +53,8 @@ Route::get('/ideas/{idea}',[IdeasController::class , 'show']) -> name('idea.show
 Route::get('/ideas/{idea}/edit',[IdeasController::class , 'edit']) -> name('idea.edit');
 Route::put('/ideas/{idea}',[IdeasController::class , 'update']) -> name('idea.update');
 Route::delete('/idea/{idea}',[IdeasController::class , 'destroy']) -> name('idea.destroy');
+Route::post('/ideas/{idea}/comments',[CommentController::class , 'store']) -> name('ideas.comments.store');
 
-// model
-// controller
-// migration
-// setup the route
 
 Route::get('/terms', function() {
     return view('terms');

@@ -10,6 +10,7 @@ class IdeasController extends Controller
 
 
     public function show(Idea $idea){
+
         return view('ideas.show',compact('idea'));
     }
     public function edit(Idea $idea){
