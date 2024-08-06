@@ -12,11 +12,17 @@ class Idea extends Model
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var array<int,string>
      */
-    protected $fillable = [
-        'content',
-        'likes',
+    // protected $fillable = [
+    //     'content',
+    //     'likes',
+    // ];
+
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at',
     ];
 
     public function comments()
