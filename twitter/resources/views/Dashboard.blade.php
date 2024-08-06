@@ -57,21 +57,37 @@
                             <form method="POST" action="{{ route('idea.destroy', $idea->id) }}">
                                 @csrf
                                 @method('DELETE')
-                                <a  href="{{ route('idea.edit',$idea->id)}}">Edit</a>
-                                <a  href="{{ route('idea.show',$idea->id)}}">view</a>
-                                <button class = "ms-3 btn btn-danger btn-sm"> Delete </button>
+                                <a href="{{ route('idea.edit', $idea->id) }}" class="btn btn-secondary mx-3">Edit</a>
+                                <a href="{{ route('idea.show',$idea->id)}}" class = "btn btn-secondary">view</a>
+                                <button class="ms-3 btn btn-danger btn-sm"> Delete </button>
 
                             </form>
 
-                            </div>
+                        </div>
                     </div>
                 </div>
 
 
                 <div class="card-body">
+                    @if($editing ?? false)
+                    <form action="{{route('idea.update , $idea -> id')}}" method="post">
+                        @csrf
+                        @method('PUT')
+                        <div class="mb-3">
+                            <textarea name="content" class="form-control" id="content" rows="3">{{$idea -> content}}</textarea>
+                            @error('content')
+                            <div class="alert alert-danger mt-4">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="">
+                            <button type="submit" class="btn btn-dark mt-4"> update </button>
+                        </div>
+                    </form>
+                    @else
                     <p class="fs-6 fw-light text-muted">
                         {{ $idea->content }}
                     </p>
+                    @endif
                     <div class="d-flex justify-content-between">
                         <div>
                             <a href="#" class="fw-light nav-link fs-6"> <span class="fas fa-heart me-1">
