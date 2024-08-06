@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\IdeasController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\AuthController;
 
 /*
 
@@ -54,6 +55,10 @@ Route::get('/ideas/{idea}/edit',[IdeasController::class , 'edit']) -> name('idea
 Route::put('/ideas/{idea}',[IdeasController::class , 'update']) -> name('idea.update');
 Route::delete('/idea/{idea}',[IdeasController::class , 'destroy']) -> name('idea.destroy');
 Route::post('/ideas/{idea}/comments',[CommentController::class , 'store']) -> name('ideas.comments.store');
+
+// register rout
+Route::get('/register', [AuthController::class , 'register']) -> name('register');
+Route::post('/register', [AuthController::class , 'store']);
 
 
 Route::get('/terms', function() {

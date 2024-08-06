@@ -14,10 +14,6 @@ class Idea extends Model
      *
      * @var array<int,string>
      */
-    // protected $fillable = [
-    //     'content',
-    //     'likes',
-    // ];
 
     protected $guarded = [
         'id',
