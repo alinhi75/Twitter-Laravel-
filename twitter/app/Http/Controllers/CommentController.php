@@ -13,8 +13,10 @@ class CommentController extends Controller
         request()->validate([
             'content' => 'required|min:3'
         ]);
+
         $comment = new Comment();
         $comment->idea_id = $idea->id;
+        $comment->user_id = auth()->id();
         $comment->content = request()->get('content');
         $comment -> save();
 

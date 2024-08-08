@@ -1,3 +1,4 @@
+@auth
 <h4> Share yours ideas </h4>
 <div class="row">
     <!-- action with post url -->
@@ -14,3 +15,11 @@
     </div>
     </form>
 </div>
+@endauth
+@guest
+<div class="alert alert-info">
+    <h4> You are not logged in </h4>
+    <a href="{{route('login')}}"> Login </a> to share your ideas
+</div>
+@endguest
+

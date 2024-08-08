@@ -27,10 +27,11 @@ class IdeasController extends Controller
     }
     public function store(){
 
-        request() -> validate([
-            'content' => 'required|min:3|max:240'
+        $validated = request() -> validate([
+            'content' => 'required|min:5|max:240'
         ]);
-        $idea = Idea::create(request() -> all());
+        $validated['user_id'] = auth() -> id();
+        $idea = Idea::create($validated);
         return redirect() -> route('dashboard',$idea -> id) -> with ('success','Idea was added successfully');
     }
 
