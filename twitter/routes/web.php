@@ -51,12 +51,12 @@ Controller: Logic
 Route::get('/', [DashboardController::class , 'index']) -> name('dashboard');
 Route::post('/idea',[IdeasController::class , 'store']) -> name('idea.create');
 Route::get('/ideas/{idea}',[IdeasController::class , 'show']) -> name('idea.show');
-Route::get('/ideas/{idea}/edit',[IdeasController::class , 'edit']) -> name('idea.edit');
-Route::put('/ideas/{idea}',[IdeasController::class , 'update']) -> name('idea.update');
-Route::delete('/idea/{idea}',[IdeasController::class , 'destroy']) -> name('idea.destroy');
-Route::post('/ideas/{idea}/comments',[CommentController::class , 'store']) -> name('ideas.comments.store');
+Route::get('/ideas/{idea}/edit',[IdeasController::class , 'edit']) -> name('idea.edit')->middleware('auth');
+Route::put('/ideas/{idea}',[IdeasController::class , 'update']) -> name('idea.update')->middleware('auth');
+Route::delete('/idea/{idea}',[IdeasController::class , 'destroy']) -> name('idea.destroy')->middleware('auth');
+Route::post('/ideas/{idea}/comments',[CommentController::class , 'store']) -> name('ideas.comments.store')->middleware('auth');
 
-// register rout
+// Authentication Routes
 Route::get('/register', [AuthController::class , 'register']) -> name('register');
 Route::post('/register', [AuthController::class , 'store']);
 Route::get('/login', [AuthController::class , 'login']) -> name('login');
