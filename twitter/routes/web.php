@@ -45,18 +45,17 @@ Controller: Logic
 
 */
 
+Route::group(['prefix'=> 'ideas'],function(){
 
+    Route::middleware('auth') -> group(function(){
 
-
-Route::get('/', [DashboardController::class , 'index']) -> name('dashboard');
-Route::post('/idea',[IdeasController::class , 'store']) -> name('idea.create');
-Route::get('/ideas/{idea}',[IdeasController::class , 'show']) -> name('idea.show');
-Route::get('/ideas/{idea}/edit',[IdeasController::class , 'edit']) -> name('idea.edit')->middleware('auth');
-Route::put('/ideas/{idea}',[IdeasController::class , 'update']) -> name('idea.update')->middleware('auth');
-Route::delete('/idea/{idea}',[IdeasController::class , 'destroy']) -> name('idea.destroy')->middleware('auth');
-Route::post('/ideas/{idea}/comments',[CommentController::class , 'store']) -> name('ideas.comments.store')->middleware('auth');
-
-// Authentication Routes
+        Route::get(' /{idea}',[IdeasController::class , 'show']) -> name('idea.show')->withoutmiddleware('auth');
+        Route::get(' /{idea}/edit',[IdeasController::class , 'edit']) -> name('idea.edit');
+        Route::put(' /{idea}',[IdeasController::class , 'update']) -> name('idea.update');
+        Route::post(' /{idea}/comments',[CommentController::class , 'store']) -> name('ideas.comments.store');
+    });
+});
+//Authentification
 Route::get('/register', [AuthController::class , 'register']) -> name('register');
 Route::post('/register', [AuthController::class , 'store']);
 Route::get('/login', [AuthController::class , 'login']) -> name('login');
@@ -64,6 +63,13 @@ Route::post('/login', [AuthController::class , 'authenticate']);
 Route::post('/logout', [AuthController::class , 'logout']) -> name('logout');
 
 
+
+Route::post('/idea',[IdeasController::class , 'store']) -> name('idea.create');
+Route::delete('/idea/{idea}',[IdeasController::class , 'destroy']) -> name('idea.destroy')->middleware('auth');
+
+
 Route::get('/terms', function() {
     return view('terms');
 });
+
+Route::get('/', [DashboardController::class , 'index']) -> name('dashboard');
