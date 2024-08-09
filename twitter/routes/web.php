@@ -49,10 +49,11 @@ Route::group(['prefix'=> 'ideas'],function(){
 
     Route::middleware('auth') -> group(function(){
 
-        Route::get(' /{idea}',[IdeasController::class , 'show']) -> name('idea.show')->withoutmiddleware('auth');
+        Route::get(' /{idea}',[IdeasController::class , 'show']) -> name('idea.show')->withoutMiddleware('auth');
         Route::get(' /{idea}/edit',[IdeasController::class , 'edit']) -> name('idea.edit');
         Route::put(' /{idea}',[IdeasController::class , 'update']) -> name('idea.update');
         Route::post(' /{idea}/comments',[CommentController::class , 'store']) -> name('ideas.comments.store');
+
     });
 });
 //Authentification
@@ -73,3 +74,7 @@ Route::get('/terms', function() {
 });
 
 Route::get('/', [DashboardController::class , 'index']) -> name('dashboard');
+
+
+
+// ideas/{idea}/comments/{comment}
