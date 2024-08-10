@@ -8,6 +8,7 @@
         @include('shared.success-message')
         @include('shared.submit_idea')
         <hr>
+        @if(count($ideas) >0)
         @foreach($ideas as $idea)
         <div class="mt-3">
             <div class="card">
@@ -72,8 +73,11 @@
             </div>
         </div>
         @endforeach
+        @else
+        <div class="alert alert-info">No ideas found , Search for something else</div>
+        @endif
         <div class="mt-3">
-            {{ $ideas->links() }}
+            {{ $ideas->withQueryString()->links() }}
         </div>
     </div>
     <div class="col-3">

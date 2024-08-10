@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\IdeasController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 
 /*
 
@@ -74,6 +75,9 @@ Route::get('/terms', function() {
 });
 
 Route::get('/', [DashboardController::class , 'index']) -> name('dashboard');
+Route::resource('users', UserController::class)->only(['show','edit','update'])->middleware('auth');
+
+// Route::get('/profile', [ProfileController::class , 'show']) -> name('profile');
 
 
 
