@@ -1,6 +1,9 @@
 <div class="col-6">
     <div class="card">
         <div class="px-3 pt-4 pb-2">
+            <form action="{{route('users.update',$user->id)}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
             <div class="d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center">
 
@@ -9,7 +12,10 @@
 
                     <div>
                         @if($editing ?? false)
-                        <input value="{{ $user->name }}" type="text" class="form-control">
+                        <input name="name" value="{{ $user->name }}" type="text" class="form-control">
+                        @error('name')
+                        <div class="alert alert-danger mt-4">{{ $message }}</div>
+                        @enderror
                         @else
                         <h3 class="card-title mb-0"><a href="#"> {{ $user->name }}
                             </a></h3>
@@ -28,9 +34,22 @@
                 @endif
                 @endauth
             </div>
+            @if($editing ?? false)
+
+            <div>
+                <label class="mt-4 " for="image">Profile Picture</label>
+                <input name="image" type="file" class="form-control mt-3">
+                @error('image')
+                <div class="alert alert-danger mt-4">{{ $message }}</div>
+                @enderror
+            </div>
+            @endif
             <div class="px-2 mt-4">
                 @if($editing ?? false)
                 <textarea value="Add your Bio Here" class="form-control" rows="3"></textarea>
+                @error('bio')
+                <div class="alert alert-danger mt-4">{{ $message }}</div>
+                @enderror
                 <div class="d-flex justify-content-end mt-3">
                     <button class="btn btn-primary btn-sm"> Save </button>
                 </div>
@@ -77,6 +96,7 @@
                 </a>
                 @endforeach
             </div>
+            </form>
         </div>
     </div>
 </div>
