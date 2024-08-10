@@ -3,6 +3,7 @@
         <div class="px-3 pt-4 pb-2">
             <div class="d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center">
+
                     <img style="width:150px" class="me-3 avatar-sm rounded-circle"
                         src="https://api.dicebear.com/6.x/fun-emoji/svg?seed=Mario" alt="Mario Avatar">
                     <div>
@@ -11,6 +12,13 @@
                         <span class="fs-6 text-muted">@mario</span>
                     </div>
                 </div>
+                @auth
+                @if (Auth::user()->id == $user->id)
+                <div>
+                    <a href="{{route('users.edit',$user->id)}}" class="btn btn-primary btn-sm"> Edit Profile </a>
+                </div>
+                @endif
+                @endauth
             </div>
             <div class="px-2 mt-4">
                 <h5 class="fs-5"> About : </h5>
@@ -27,9 +35,13 @@
                     <a href="#" class="fw-light nav-link fs-6"> <span class="fas fa-comment me-1">
                         </span> {{$user->comments()->count()}} </a>
                 </div>
+                @auth
+                @if (Auth::user()->id != $user->id)
                 <div class="mt-3">
                     <button class="btn btn-primary btn-sm"> Follow </button>
                 </div>
+                @endif
+                @endauth
             </div>
         </div>
     </div>
