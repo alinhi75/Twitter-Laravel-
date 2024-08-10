@@ -79,6 +79,8 @@ Route::resource('users', UserController::class)->only(['show','edit','update'])-
 
 // Route::get('/profile', [ProfileController::class , 'show']) -> name('profile');
 
+Route::get('/profile', [UserController::class , 'profile']) -> middleware('auth')->name('profile');
+
 
 
 // ideas/{idea}/comments/{comment}

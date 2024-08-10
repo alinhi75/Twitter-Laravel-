@@ -18,7 +18,7 @@
                             <img style="width:50px" class="me-2 avatar-sm rounded-circle"
                                 src="https://api.dicebear.com/6.x/fun-emoji/svg?seed={{$idea->user->name}}" alt="{{$idea->user->name}}">
                             <div>
-                                <h5 class="card-title mb-0"><a href="#"> {{$idea->user->name}}
+                                <h5 class="card-title mb-0"><a href="{{route('users.show',$idea->user->id)}}"> {{$idea->user->name}}
                                     </a></h5>
                             </div>
                         </div>

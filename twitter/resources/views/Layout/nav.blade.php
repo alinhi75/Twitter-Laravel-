@@ -10,10 +10,10 @@
             <ul class="navbar-nav">
                 @guest
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/login">Login</a>
+                    <a class="nav-link active" aria-current="page" href="{{route('login')}}">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/register">Register</a>
+                    <a class="nav-link" href="{{route('register')}}">Register</a>
                 </li>
                 @endguest
                 @auth
@@ -27,7 +27,7 @@
                         @csrf
                         <button class="btn btn-danger mx-4">Logout</button>
                         <form>
-                            <a href="/profile" class="btn btn-primary">Profile</a>
+                            <a href="{{route('profile')}}" class="btn btn-primary">Profile</a>
 
                         </form>
 
