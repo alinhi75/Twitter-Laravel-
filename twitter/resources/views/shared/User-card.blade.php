@@ -3,15 +3,16 @@
         <div class="px-3 pt-4 pb-2">
             <form action="{{route('users.update',$user->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('PUT')
+                @method('put')
             <div class="d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center">
 
                     <img style="width:150px" class="me-3 avatar-sm rounded-circle"
-                        src="https://api.dicebear.com/6.x/fun-emoji/svg?seed=Mario" alt="Mario Avatar">
+                        src="{{$user->profileImage()}}" alt="profile-picture">
 
                     <div>
                         @if($editing ?? false)
+                        <label class="mt-4 " for="name">Name : </label>
                         <input name="name" value="{{ $user->name }}" type="text" class="form-control">
                         @error('name')
                         <div class="alert alert-danger mt-4">{{ $message }}</div>
@@ -37,7 +38,7 @@
             @if($editing ?? false)
 
             <div>
-                <label class="mt-4 " for="image">Profile Picture</label>
+                <label class="mt-4 " for="image">Profile Picture : </label>
                 <input name="image" type="file" class="form-control mt-3">
                 @error('image')
                 <div class="alert alert-danger mt-4">{{ $message }}</div>
@@ -46,20 +47,18 @@
             @endif
             <div class="px-2 mt-4">
                 @if($editing ?? false)
-                <textarea value="Add your Bio Here" class="form-control" rows="3"></textarea>
+                <label class="mt-4 " for="bio">Bio : </label>
+                <textarea name="bio" value="Add your Bio Here" id="bio" class="form-control" rows="3">{{$user->bio}}</textarea>
                 @error('bio')
                 <div class="alert alert-danger mt-4">{{ $message }}</div>
                 @enderror
                 <div class="d-flex justify-content-end mt-3">
-                    <button class="btn btn-primary btn-sm"> Save </button>
+                    <button type="submit" class="btn btn-primary btn-sm"> Save </button>
                 </div>
                 @else
                 <h5 class="fs-5"> Bio : </h5>
                 <p class="fs-6 fw-light">
-                    This book is a treatise on the theory of ethics, very popular during the
-                    Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes
-                    from a line in section 1.10.32.
-                </p>
+                    {{$user->bio}}
                 @endif
                 <div class="d-flex justify-content-start">
                     <a href="#" class="fw-light nav-link fs-6 me-3"> <span class="fas fa-user me-1">
