@@ -6,7 +6,7 @@
                             <span>Home</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="{{ Route::
+                        <a class="{{ Request::
                         is('terms') ? 'text-white bg-primary rounded' : ''}} nav-link" href="{{url('terms')}}">
                             <span>Terms</span></a>
                     </li>
