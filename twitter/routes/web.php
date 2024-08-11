@@ -8,6 +8,7 @@ use App\Http\Controllers\IdeasController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FollowerController;
 
 /*
 
@@ -81,6 +82,12 @@ Route::resource('users', UserController::class)->only(['show','edit','update'])-
 
 Route::get('/profile', [UserController::class , 'profile']) -> middleware('auth')->name('profile');
 
+// Follower routes
+Route::post('users/{user}/follow', [FollowerController::class, 'follow'])
+    ->middleware('auth')
+    ->name('users.follow');
 
+Route::post('users/{user}/unfollow', [FollowerController::class, 'unfollow'])
+    ->middleware('auth')
+    ->name('users.unfollow');
 
-// ideas/{idea}/comments/{comment}
