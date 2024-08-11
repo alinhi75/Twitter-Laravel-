@@ -73,7 +73,7 @@ Route::delete('/idea/{idea}',[IdeasController::class , 'destroy']) -> name('idea
 
 Route::get('/terms', function() {
     return view('terms');
-});
+})->name('terms');
 
 Route::get('/', [DashboardController::class , 'index']) -> name('dashboard');
 Route::resource('users', UserController::class)->only(['show','edit','update'])->middleware('auth');
