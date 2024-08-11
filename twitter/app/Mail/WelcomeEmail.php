@@ -9,6 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use App\Models\User;
+use Illuminate\Mail\Mailables\Attachment;
 
 class WelcomeEmail extends Mailable
 {
