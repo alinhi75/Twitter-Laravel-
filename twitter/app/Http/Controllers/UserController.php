@@ -39,14 +39,16 @@ class UserController extends Controller
         $validated = request()->validate([
             'name' => 'required|string|min:3|max:255',
             'bio' => 'nullable|string|min:3|max:255',
-            'image' => 'image',
+            'image' => 'nullable|image|max:2048',
         ]);
 
         if (request()->hasFile('image')) {
+
+            if ($user->image) {
+                Storage::disk('public')->delete($user->image);
+            }
             $validated['image'] = request()->file('image')->store('profile_images', 'public');
         }
-
-        Storage::disk('public')->delete($user->image);
 
         $user->update($validated);
 

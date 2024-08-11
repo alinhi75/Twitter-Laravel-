@@ -58,4 +58,12 @@ class User extends Authenticatable
     {
         return $this->image ? '/storage/' . $this->image : 'https://api.dicebear.com/6.x/fun-emoji/svg?seed=Mario';
     }
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'follower_user', 'user_id', 'follower_id')->withtimestamps();
+    }
+    public function followings()
+    {
+        return $this->belongsToMany(User::class, 'follower_user', 'follower_id', 'user_id')->withTimestamps();
+    }
 }
