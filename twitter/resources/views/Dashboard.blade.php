@@ -74,7 +74,7 @@
         <div class="alert alert-info">No ideas found , Search for something else</div>
         @endif
         <div class="mt-3">
-            {{ $ideas->withQueryString()->links() }}
+            {{ $ideas->withQueryString()->links('vendor.pagination.bootstrap-4') }}
         </div>
     </div>
     <div class="col-3">
