@@ -6,7 +6,7 @@
     </div>
     <div class="col-6">
         @include('shared.success-message')
-        @include('shared.submit_idea')
+        @include('ideas.shared.submit_idea')
         <hr>
         @if(count($ideas) >0)
         @foreach($ideas as $idea)
