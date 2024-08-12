@@ -10,6 +10,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\IdeaLikeController;
+use App\Http\Controllers\FeedController;
 
 /*
 
@@ -100,4 +101,6 @@ Route::post('ideas/{idea}/like', [IdeaLikeController::class, 'like'])
 Route::post('ideas/{idea}/unlike', [IdeaLikeController::class, 'unlike'])
     ->middleware('auth')
     ->name('ideas.unlike');
+
+Route::get('/feed', [FeedController::class , '__invoke'])->middleware('auth')-> name('feed');
 
