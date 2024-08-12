@@ -19,7 +19,9 @@
                             <img style="width:50px" class="me-2 avatar-sm rounded-circle"
                                 src="https://api.dicebear.com/6.x/fun-emoji/svg?seed=Mario" alt="Mario Avatar">
                             <div>
-                                <h5 class="card-title mb-0"><a href="#"> Mario
+
+                                <h5 class="card-title
+                                    mb-0"><a href="{{route('users.show',$idea->user->id)}}">{{$idea->user->name}}
                                     </a></h5>
                             </div>
                         </div>
@@ -43,7 +45,7 @@
                         @include('Ideas.shared.like-button')
                         <div>
                             <span class="fs-6 fw-light text-muted"> <span class="fas fa-clock"> </span>
-                                {{$idea -> created_at}} </span>
+                                {{$idea -> created_at -> toDateString() }} </span>
                         </div>
                     </div>
                     @foreach($idea -> comments as $comment)
