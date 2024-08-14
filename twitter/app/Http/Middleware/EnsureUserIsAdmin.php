@@ -16,7 +16,7 @@ class EnsureUserIsAdmin
     public function handle($request, Closure $next)
     {
         if (!auth()->user()->is_admin) {
-           abort(403, 'Unauthorized action.');
+           abort(403, 'You are not authorized to access this page');
         }
         return $next($request);
     }
