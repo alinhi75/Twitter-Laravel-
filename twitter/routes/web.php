@@ -11,6 +11,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\IdeaLikeController;
 use App\Http\Controllers\FeedController;
+//dashboardof admin
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 
 /*
 
@@ -86,11 +88,11 @@ Route::resource('users', UserController::class)->only(['show']);
 Route::get('/profile', [UserController::class , 'profile']) -> middleware('auth')->name('profile');
 
 // Follower routes
-Route::post('users/{user}/follow', [FollowerController::class, 'follow'])
+Route::post('/users/{user}/follow', [FollowerController::class, 'follow'])
     ->middleware('auth')
     ->name('users.follow');
 
-Route::post('users/{user}/unfollow', [FollowerController::class, 'unfollow'])
+Route::post('/users/{user}/unfollow', [FollowerController::class, 'unfollow'])
     ->middleware('auth')
     ->name('users.unfollow');
 
@@ -103,4 +105,5 @@ Route::post('ideas/{idea}/unlike', [IdeaLikeController::class, 'unlike'])
     ->name('ideas.unlike');
 
 Route::get('/feed', [FeedController::class , '__invoke'])->middleware('auth')-> name('feed');
+Route::get('/admin', [AdminDashboardController::class , 'index'])->middleware('auth') -> name('admin.dashboard');
 

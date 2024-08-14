@@ -59,17 +59,25 @@ class User extends Authenticatable
     {
         return $this->image ? '/storage/' . $this->image : 'https://api.dicebear.com/6.x/fun-emoji/svg?seed=Mario';
     }
-    public function followers()
+    public function followers() : BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'follower_user', 'user_id', 'follower_id')->withtimestamps();
+        return $this->belongsToMany(User::class, 'follower_user', 'user_id', 'follower_id');
     }
-    public function followings()
+    public function followings() : BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'follower_user', 'follower_id', 'user_id')->withTimestamps();
+        return $this->belongsToMany(User::class, 'follower_user', 'follower_id', 'user_id');
     }
-    public function follows(User $user)
+    public function follow(User $user)
     {
-        return $this->followings->where('user_id', $user->id);
+        return $this->followings()->attach($user->id);
+    }
+    public function unfollow(User $user)
+    {
+        return $this->followings()->detach($user->id);
+    }
+    public function isFollowing(User $user)
+    {
+        return $this->followings()->where('user_id', $user->id)->exists();
     }
     public function likes()
     {

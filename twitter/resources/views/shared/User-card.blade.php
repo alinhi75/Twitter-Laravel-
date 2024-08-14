@@ -74,15 +74,15 @@
                     @auth
                     @if (Auth::user()->id != $user->id)
                     <div class="mt-3">
-                        @if(Auth::user()->follows($user))
-                        <form action="{{ route('users.follow', $user->id) }}" method="POST">
+                        @if (auth()->user()->isFollowing($user))
+                        <form action="{{ route('users.unfollow', $user) }}" method="POST">
                             @csrf
-                            <button type="submit" class="btn btn-primary btn-sm">Follow</button>
+                            <button type="submit" class="btn btn-danger btn-sm">Unfollow</button>
                         </form>
                         @else
-                        <form action="{{ route('users.unfollow', $user->id) }}" method="POST">
+                        <form action="{{ route('users.follow', $user) }}" method="POST">
                             @csrf
-                            <button type="submit" class="btn btn-primary btn-sm">Unfollow</button>
+                            <button type="submit" class="btn btn-primary btn-sm">Follow</button>
                         </form>
                         @endif
                     </div>
