@@ -24,12 +24,17 @@
                             </div>
                         </div>
                         <div>
+                            @if (auth()->user()->id == $idea->user_id || auth()->user()->is_admin)
+
                             <form method="POST" action="{{ route('idea.destroy', $idea->id) }}">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger btn-sm"> Delete </button>
-
+                                <a href="{{ route('idea.edit', $idea->id) }}" class="btn btn-secondary mx-3">Edit</a>
                             </form>
+
+                            @endif
+
                         </div>
                     </div>
                 </div>

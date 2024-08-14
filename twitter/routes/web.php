@@ -11,8 +11,6 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\IdeaLikeController;
 use App\Http\Controllers\FeedController;
-
-use App\Http\Middleware\EnsureUserIsAdmin;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 
 /*
@@ -106,5 +104,5 @@ Route::post('ideas/{idea}/unlike', [IdeaLikeController::class, 'unlike'])
     ->name('ideas.unlike');
 
 Route::get('/feed', [FeedController::class , '__invoke'])->middleware('auth')-> name('feed');
-Route::get('/admin', [AdminDashboardController::class , 'index']) -> name('admin.dashboard')->middleware(['auth',EnsureUserIsAdmin::class]);
+Route::get('/admin', [AdminDashboardController::class , 'index']) -> name('admin.dashboard')->middleware(['auth', 'can:admin']);
 

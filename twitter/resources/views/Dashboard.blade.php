@@ -16,23 +16,32 @@
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="d-flex align-items-center">
                             <img style="width:50px" class="me-2 avatar-sm rounded-circle"
-                                src="https://api.dicebear.com/6.x/fun-emoji/svg?seed={{$idea->user->name}}" alt="{{$idea->user->name}}">
+                                src="https://api.dicebear.com/6.x/fun-emoji/svg?seed={{$idea->user->name}}"
+                                alt="{{$idea->user->name}}">
                             <div>
-                                <h5 class="card-title mb-0"><a href="{{route('users.show',$idea->user->id)}}"> {{$idea->user->name}}
+                                <h5 class="card-title mb-0"><a href="{{route('users.show',$idea->user->id)}}">
+                                        {{$idea->user->name}}
                                     </a></h5>
                             </div>
                         </div>
+                        @auth
+                        @if(auth()->user()->id == $idea->user_id || auth()->user()->is_admin)
+
                         <div>
+
                             <form method="POST" action="{{ route('idea.destroy', $idea->id) }}">
                                 @csrf
                                 @method('DELETE')
                                 <a href="{{ route('idea.edit', $idea->id) }}" class="btn btn-secondary mx-3">Edit</a>
-                                <a href="{{ route('idea.show',$idea->id)}}" class = "btn btn-secondary">view</a>
+                                <a href="{{ route('idea.show',$idea->id)}}" class="btn btn-secondary">view</a>
                                 <button class="ms-3 btn btn-danger btn-sm"> Delete </button>
 
                             </form>
 
+
                         </div>
+                        @endif
+                        @endauth
                     </div>
                 </div>
 
@@ -43,7 +52,8 @@
                         @csrf
                         @method('PUT')
                         <div class="mb-3">
-                            <textarea name="content" class="form-control" id="content" rows="3">{{$idea -> content}}</textarea>
+                            <textarea name="content" class="form-control" id="content"
+                                rows="3">{{$idea -> content}}</textarea>
                             @error('content')
                             <div class="alert alert-danger mt-4">{{ $message }}</div>
                             @enderror
@@ -66,7 +76,7 @@
                     </div>
 
                 </div>
-            @include('shared.comments-box')
+                @include('shared.comments-box')
             </div>
         </div>
         @endforeach
@@ -78,8 +88,8 @@
         </div>
     </div>
     <div class="col-3">
-       @include('shared.Search-bar')
-         @include('shared.follow-box')
+        @include('shared.Search-bar')
+        @include('shared.follow-box')
     </div>
 </div>
 </div>

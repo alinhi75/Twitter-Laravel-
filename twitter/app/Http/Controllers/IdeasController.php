@@ -17,9 +17,10 @@ class IdeasController extends Controller
     }
     public function edit(Idea $idea){
 
-        if(auth()->user()->id !== $idea->user_id){
-            abort(403,'You are not allowed to edit this idea');
-        }
+        // if(auth()->user()->id !== $idea->user_id){
+        //     abort(403,'You are not allowed to edit this idea');
+        // }
+        $this -> authorize('idea.edit',$idea);
 
         return view('ideas.edit',compact('idea'));
     }
@@ -48,9 +49,10 @@ class IdeasController extends Controller
 
     public function destroy(Idea $idea){
 
-        if(auth() -> user() -> id !== $idea -> user_id){
-            abort(403,'You are not allowed to delete this idea');
-        }
+        // if(auth() -> user() -> id !== $idea -> user_id){
+        //     abort(403,'You are not allowed to delete this idea');
+        // }
+        $this -> authorize('idea.delete',$idea);
 
         $idea -> delete();
         return redirect() -> route('dashboard') -> with ('success','Idea was deleted successfully');
