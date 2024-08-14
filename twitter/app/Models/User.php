@@ -23,6 +23,7 @@ class User extends Authenticatable
         'password',
         'bio',
         'image',
+        'is_admin',
     ];
 
     /**
@@ -92,5 +93,6 @@ class User extends Authenticatable
     {
         return $this->likedIdeas()->where('idea_id', $idea->id)->exists();
     }
+
 
 }

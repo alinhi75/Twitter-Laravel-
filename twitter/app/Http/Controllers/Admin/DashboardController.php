@@ -9,9 +9,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        if(!auth()->user()->is_admin){
-            abort(403,'You are not allowed to access this page');
-        }
         return view('admin.dashboard');
     }
 }
