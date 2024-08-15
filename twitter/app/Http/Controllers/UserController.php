@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Idea;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
 {
@@ -35,21 +36,17 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(User $user)
+    public function update(UpdateUserRequest $request,User $user)
     {
         $this -> authorize('update', $user);
-        $validated = request()->validate([
-            'name' => 'required|string|min:3|max:255',
-            'bio' => 'nullable|string|min:3|max:255',
-            'image' => 'nullable|image|max:2048',
-        ]);
+        $validated = $request->validated();
 
-        if (request()->hasFile('image')) {
+        if ($request->hasFile('image')) {
 
             if ($user->image) {
                 Storage::disk('public')->delete($user->image);
             }
-            $validated['image'] = request()->file('image')->store('profile_images', 'public');
+            $validated['image'] =$request->file('image')->store('profile_images', 'public');
         }
 
         $user->update($validated);
