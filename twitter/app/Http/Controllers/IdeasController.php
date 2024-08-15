@@ -24,11 +24,11 @@ class IdeasController extends Controller
     }
     public function update(Request $request, $id)
 {
-    $idea = Idea::findOrFail($id); // Step 1: Retrieve the Idea model
-    $this->authorize('update', $idea); // Step 2: Authorize the update action
+    $idea = Idea::findOrFail($id);
+    $this->authorize('update', $idea);
 
-    $idea->content = $request->input('content'); // Step 3: Update the content attribute
-    $idea->save(); // Step 4: Save the updated Idea model
+    $idea->content = $request->input('content');
+    $idea->save();
 
     return redirect()->route('idea.show', $id)->with('success', 'Idea updated successfully!'); // Step 5: Redirect with success message
 }
