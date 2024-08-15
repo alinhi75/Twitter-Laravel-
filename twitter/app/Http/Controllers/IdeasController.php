@@ -17,24 +17,21 @@ class IdeasController extends Controller
     }
     public function edit(Idea $idea){
 
-        // if(auth()->user()->id !== $idea->user_id){
-        //     abort(403,'You are not allowed to edit this idea');
-        // }
-        $this -> authorize('idea.edit',$idea);
+
+        $this -> authorize('update',$idea);
 
         return view('ideas.edit',compact('idea'));
     }
     public function update(Request $request, $id)
-    {
-        if(auth()->user()->id !== $idea->user_id){
-            abort(403,'You are not allowed to edit this idea');
-        }
-        $idea = Idea::findOrFail($id);
-        $idea->content = $request->input('content');
-        $idea->save();
+{
+    $idea = Idea::findOrFail($id); // Step 1: Retrieve the Idea model
+    $this->authorize('update', $idea); // Step 2: Authorize the update action
 
-        return redirect()->route('idea.show', $id)->with('success', 'Idea updated successfully!');
-    }
+    $idea->content = $request->input('content'); // Step 3: Update the content attribute
+    $idea->save(); // Step 4: Save the updated Idea model
+
+    return redirect()->route('idea.show', $id)->with('success', 'Idea updated successfully!'); // Step 5: Redirect with success message
+}
     public function store(){
 
 
@@ -49,10 +46,8 @@ class IdeasController extends Controller
 
     public function destroy(Idea $idea){
 
-        // if(auth() -> user() -> id !== $idea -> user_id){
-        //     abort(403,'You are not allowed to delete this idea');
-        // }
-        $this -> authorize('idea.delete',$idea);
+
+        $this -> authorize('delete',$idea);
 
         $idea -> delete();
         return redirect() -> route('dashboard') -> with ('success','Idea was deleted successfully');

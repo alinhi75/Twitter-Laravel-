@@ -26,6 +26,9 @@
                         <div>
                             @if (auth()->user()->id == $idea->user_id || auth()->user()->is_admin)
 
+
+
+
                             <form method="POST" action="{{ route('idea.destroy', $idea->id) }}">
                                 @csrf
                                 @method('DELETE')
@@ -34,6 +37,7 @@
                             </form>
 
                             @endif
+
 
                         </div>
                     </div>
