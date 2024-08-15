@@ -61,12 +61,14 @@ Route::group(['prefix'=> 'ideas'],function(){
 
     });
 });
-//Authentification
-Route::get('/register', [AuthController::class , 'register']) -> name('register');
-Route::post('/register', [AuthController::class , 'store']);
-Route::get('/login', [AuthController::class , 'login']) -> name('login');
-Route::post('/login', [AuthController::class , 'authenticate']);
-Route::post('/logout', [AuthController::class , 'logout']) -> name('logout');
+// Authentication
+Route::group(['middleware' => 'guest'], function() {
+    Route::get('/register', [AuthController::class, 'register'])->name('register');
+    Route::post('/register', [AuthController::class, 'store']);
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/login', [AuthController::class, 'authenticate']);
+});
+
 
 
 
@@ -106,3 +108,5 @@ Route::post('ideas/{idea}/unlike', [IdeaLikeController::class, 'unlike'])
 Route::get('/feed', [FeedController::class , '__invoke'])->middleware('auth')-> name('feed');
 Route::get('/admin', [AdminDashboardController::class , 'index']) -> name('admin.dashboard')->middleware(['auth', 'can:admin']);
 
+// logout route
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
