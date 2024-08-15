@@ -8,7 +8,7 @@
                     <div class="d-flex align-items-center">
 
                         <img style="width:150px" class="me-3 avatar-sm rounded-circle" src="{{$user->profileImage()}}"
-                            alt="profile-picture">
+                            alt="{{ $user->name }}">
 
                         <div>
                             @if($editing ?? false)
@@ -24,16 +24,16 @@
                             @endif
                         </div>
                     </div>
-                    @auth
-                    @if (Auth::user()->id == $user->id)
+
+                    @can('update', $user)
                     <div>
                         <a href="{{route('users.edit',$user->id)}}" class="btn btn-primary btn-sm"> Edit Profile </a>
                         @if($editing ?? false)
                         <a href="{{route('users.show',$user->id)}}" class="btn btn-primary btn-sm"> Back </a>
                         @endif
                     </div>
-                    @endif
-                    @endauth
+                    @endcan
+
                 </div>
                 @if($editing ?? false)
 
