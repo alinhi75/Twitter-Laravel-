@@ -59,12 +59,14 @@
                     @foreach($idea -> comments as $comment)
                     <div>
 
-                        <div class="mb-3">
-                            <textarea class="fs-6 form-control" rows="1"></textarea>
-                        </div>
 
-                        <div>
-                            <button class="btn btn-primary btn-sm"> Post Comment </button>
+
+                        <div class="mb-3">
+                            <form action="{{ route('ideas.comments.store', $idea->id) }}" method="POST">
+                                @csrf
+                                <textarea name="content" class="fs-6 form-control" rows="1" required></textarea>
+                                <button type="submit" class="btn btn-primary btn-sm mt-2">Post Comment</button>
+                            </form>
                         </div>
 
                         <hr>
