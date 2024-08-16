@@ -18,8 +18,7 @@
 @endauth
 @guest
 <div class="alert alert-info">
-    <h4> You are not logged in </h4>
-    <a href="{{route('login')}}"> Login </a> to share your ideas
+    <h4> {{ __('ideas.Login_to_share_your_idea') }} </h4>
 </div>
 @endguest
 
