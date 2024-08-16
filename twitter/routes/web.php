@@ -110,3 +110,9 @@ Route::get('/admin', [AdminDashboardController::class , 'index']) -> name('admin
 
 // logout route
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+
+Route::get('lang/{lang}', function ($lang) {
+    app()->setLocale($lang);
+    session()->put('locale', $lang);
+    return redirect()->route('dashboard');
+})->name('lang');
