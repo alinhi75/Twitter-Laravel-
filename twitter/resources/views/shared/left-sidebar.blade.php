@@ -7,6 +7,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="{{ Route::is('feed') ? 'text-white bg-primary rounded' : ''}} nav-link" href="{{route('feed')}}">
+                            @section('title', 'Feed')
                             <span>Feed</span></a>
                     </li>
                     <li class="nav-item">

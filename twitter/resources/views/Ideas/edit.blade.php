@@ -1,6 +1,6 @@
 
 @extends('layout.layout')
-
+@section('title', 'Edit Idea')
 @section('content')
 <div class="container">
     <h1>Edit Idea</h1>
