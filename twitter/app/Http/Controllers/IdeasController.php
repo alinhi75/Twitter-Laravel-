@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Idea;
+use App\Models\User;
+use App\Http\Requests\CreateIdeaRequest;
 
 class IdeasController extends Controller
 {
@@ -32,13 +34,11 @@ class IdeasController extends Controller
 
     return redirect()->route('idea.show', $id)->with('success', 'Idea updated successfully!'); // Step 5: Redirect with success message
 }
-    public function store(){
+    public function store(CreateIdeaRequest $request){
 
 
 
-        $validated = request() -> validate([
-            'content' => 'required|min:5|max:240'
-        ]);
+        $validated = $request -> validated();
         $validated['user_id'] = auth() -> id();
         $idea = Idea::create($validated);
         return redirect() -> route('dashboard',$idea -> id) -> with ('success','Idea was added successfully');
