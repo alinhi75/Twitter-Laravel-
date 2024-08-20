@@ -14,6 +14,7 @@ use App\Http\Controllers\FeedController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\IdeaController as AdminIdeaController;
+use App\Http\Controllers\Admin\CommentController as AdminCommentController;
 
 /*
 
@@ -125,6 +126,7 @@ Route::middleware(['auth', 'can:admin'],)->prefix('admin')->as('admin.')->group(
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::resource('users', AdminUserController::class)->only('index');
     Route::resource('ideas', AdminIdeaController::class)->only('index');
+    Route::resource('comments', AdminCommentController::class)->only('index','destroy');
 });
 
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');

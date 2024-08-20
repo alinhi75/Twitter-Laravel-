@@ -1,5 +1,5 @@
 @extends('layout.layout')
-@section('title', 'Ideas | Admin Dashboard')
+@section('title', 'Comments | Admin Dashboard')
 @section('content')
 <div class="row">
     <div class="col-3">
@@ -12,24 +12,26 @@
                 <tr>
                     <th>Id</th>
                     <th>User</th>
+                    <th>Idea</th>
                     <th>Content</th>
                     <th>Created At</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($ideas as $idea)
+                @foreach($comments as $comment)
                 <tr>
-                    <td>{{$idea->id}}</td>
+                    <td>{{$comment->id}}</td>
                     <td>
-                        <a href="{{route('users.show',$idea->user)}}"> {{$idea->user->name}}</a>
+                        <a href="{{route('users.show',$comment->user)}}"> {{$comment->user->name}}</a>
                     </td>
-                    <td>{{$idea->content}}</td>
-                    <td>{{$idea->created_at->toDateString()}}</td>
                     <td>
-                        <a href="{{route('idea.show',$idea->id)}}" class="btn btn-primary btn-sm">Show</a>
-                        <a href="{{route('idea.edit',$idea->id)}}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('idea.destroy', $idea->id) }}" method="POST" class="d-inline">
+                        <a href="{{route('idea.show',$comment->idea)}}"> {{$comment->idea->id}}</a>
+                    </td>
+                    <td>{{$comment->content}}</td>
+                    <td>{{$comment->created_at->toDateString()}}</td>
+                    <td>
+                        <form action="{{route('admin.comments.destroy',$comment)}}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
@@ -40,7 +42,7 @@
             </tbody>
         </table>
         <div>
-            {{$ideas->links()}}
+            {{$comments->links()}}
         </div>
     </div>
 </div>
