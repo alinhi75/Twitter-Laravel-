@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
 
         Debugbar::enable();
 
-        Cache::forget('topUsers');
+        // Cache::forget('topUsers');
 
         $topUsers = Cache::remember('topUsers', now()->addMinutes(3), function () {
             return User::withCount('ideas')

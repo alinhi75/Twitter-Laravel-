@@ -12,6 +12,7 @@ use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\IdeaLikeController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 
 /*
 
@@ -35,7 +36,7 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 // auth
 
 
-// home
+// homeAdminUserController
 
 /*
 
@@ -106,7 +107,7 @@ Route::post('ideas/{idea}/unlike', [IdeaLikeController::class, 'unlike'])
     ->name('ideas.unlike');
 
 Route::get('/feed', [FeedController::class , '__invoke'])->middleware('auth')-> name('feed');
-Route::get('/admin', [AdminDashboardController::class , 'index']) -> name('admin.dashboard')->middleware(['auth', 'can:admin']);
+
 
 // logout route
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
@@ -116,3 +117,10 @@ Route::get('lang/{lang}', function ($lang) {
     session()->put('locale', $lang);
     return redirect()->route('dashboard');
 })->name('lang');
+
+
+
+Route::middleware(['auth', 'can:admin'],)->prefix('admin')->as('admin.')->group(function () {
+    Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/users', [AdminUserController::class, 'index'])->name('users');
+});
