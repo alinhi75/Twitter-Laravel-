@@ -124,3 +124,5 @@ Route::middleware(['auth', 'can:admin'],)->prefix('admin')->as('admin.')->group(
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::get('/users', [AdminUserController::class, 'index'])->name('users');
 });
+
+Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');

@@ -34,10 +34,14 @@
                     <td>{{$user->created_at}}</td>
                     <td>{{$user->updated_at}}</td>
                     <td>
-
                         <a href="{{route('users.show', $user->id)}}" class="btn btn-primary">Show</a>
-                        <a href="{{route('users.edit', $user->id)}}" class="btn btn-Secondary">Edit</a>
-
+                        <a href="{{route('users.edit', $user->id)}}" class="btn btn-secondary">Edit</a>
+                        <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger"
+                                onclick="return confirm('Are you sure you want to delete this user?');">Delete</button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach
