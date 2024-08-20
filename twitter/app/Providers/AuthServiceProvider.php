@@ -1,27 +1,25 @@
 <?php
-
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
-use App\Models\User;
 use App\Models\Idea;
+use App\Policies\IdeaPolicy;
+use App\Models\User;
 
 class AuthServiceProvider extends ServiceProvider
 {
     /**
-     * Register services.
+     * The policy mappings for the application.
+     *
+     * @var array
      */
-    public function register(): void
-    {
-        //
-    }
     protected $policies = [
         Idea::class => IdeaPolicy::class,
     ];
 
     /**
-     * Bootstrap services.
+     * Register any authentication / authorization services.
      */
     public function boot(): void
     {
@@ -30,6 +28,5 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('admin', function (User $user) {
             return (bool) $user->is_admin;
         });
-
     }
 }

@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\View;
+use App\Models\User;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,13 @@ class AppServiceProvider extends ServiceProvider
     {
 
         paginator::useBootstrapfive();
-        App::setLocale('es');
+
+        $topUsers = User::withCount('ideas')
+        ->orderBy('ideas_count', 'desc')
+        ->limit(5)->get();
+
+        View::share('topUsers', $topUsers);
+
+
     }
 }
