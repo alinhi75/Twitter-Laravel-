@@ -100,6 +100,12 @@ This project is a simplified clone of Twitter built using Laravel, a popular PHP
 ### Comments on Tweet
 ![Alt text](img/comments.png)
 
+### Admin Dashboard 
+![Alt text](img/admindash1.png)
+
+### Admin Ideas Management
+![Alt text](img/admindash2.png)
+
 ## User Credentials for Testing
 
 - **Username**: `new@new.com`, **Password**: `alialiali` (Admin)
