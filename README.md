@@ -102,8 +102,7 @@ This project is a simplified clone of Twitter built using Laravel, a popular PHP
 
 ## User Credentials for Testing
 
-- **Username**: `user1`, **Password**: `password`
-- **Username**: `user2`, **Password**: `password`
+- **Username**: `new@new.com`, **Password**: `alialiali` (Admin)
 
 ## How to Run the Project
 
