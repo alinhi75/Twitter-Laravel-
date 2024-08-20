@@ -11,11 +11,10 @@ class DashboardController extends Controller
     public function index() {
 
 
-        $ideas = Idea::orderby('created_at','DESC');
 
-        if (request()->has('search')) {
-            $ideas = $ideas->search(request('search', ''));
-        }
+        $ideas = Idea::when(request('search'), function($query){
+            $query->search(request('search',''));
+        })->orderBy('created_at','DESC');
 
 
         return view('dashboard',[
