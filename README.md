@@ -1,107 +1,118 @@
+# Twitter Clone with Laravel
 
-# Twitter Clone Project
+## Project Overview
 
-This repository contains a sample Twitter clone project built using the Laravel framework. The project aims to mimic some of the core features of Twitter, such as posting tweets, following users, and liking posts. It serves as an educational project to demonstrate the use of Laravel in a real-world application.
+This project is a simplified clone of Twitter built using Laravel, a popular PHP framework. The application allows users to register, log in, post tweets, follow other users, and interact with tweets through likes and comments. The project demonstrates fundamental Laravel features, including routing, Eloquent ORM, Blade templating, and authentication.
 
-## Table of Contents
+## Application Routes
 
-- [Features](#features)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+- **Route `/`**: Home Page displaying a feed of tweets from followed users.
+- **Route `/login`**: Login Form for users.
+- **Route `/register`**: Registration Form for new users.
+- **Route `/logout`**: Logout endpoint to terminate the user session.
+- **Route `/profile/{username}`**: User Profile page displaying the user’s tweets, followers, and following.
+- **Route `/tweet/{id}`**: Detailed view of a single tweet, including comments.
+- **Route `/tweet/create`**: Form to create a new tweet.
+- **Route `/tweet/{id}/edit`**: Form to edit an existing tweet.
+- **Route `/tweet/{id}/delete`**: Endpoint to delete a tweet.
+- **Route `/users`**: List of all users for discovering and following.
+- **Route `/follow/{username}`**: Endpoint to follow or unfollow a user.
+- **Route `/*`**: 404 Page Not Found for any undefined routes.
 
-## Features
+## Main Laravel Controllers
 
-- User authentication (registration, login, logout)
-- Profile management
-- Posting tweets
-- Liking tweets
-- Following and unfollowing users
-- Viewing tweets from followed users (timeline)
-- Responsive design
+- **`AuthController`**: Manages user authentication, including login and registration.
+- **`HomeController`**: Handles the main feed displaying tweets from followed users.
+- **`ProfileController`**: Manages user profile views, including tweets, followers, and following.
+- **`TweetController`**: Handles CRUD operations for tweets, including creating, editing, and deleting tweets.
+- **`CommentController`**: Manages the creation of comments on tweets.
+- **`FollowController`**: Manages the follow/unfollow functionality between users.
+- **`LikeController`**: Handles liking and unliking of tweets.
 
-## Installation
+## Database Schema
 
-To set up the project locally, follow these steps:
+### Tables
 
-1. **Clone the repository:**
-   \`\`\`bash
-   git clone https://github.com/yourusername/twitter-clone.git
-   cd twitter-clone
-   \`\`\`
+- **`users`** - *id*, *name*, *email*, *password*, *created_at*, *updated_at*
+- **`tweets`** - *id*, *user_id*, *content*, *created_at*, *updated_at*
+- **`comments`** - *id*, *tweet_id*, *user_id*, *comment_text*, *created_at*, *updated_at*
+- **`likes`** - *id*, *user_id*, *tweet_id*, *created_at*, *updated_at*
+- **`follows`** - *id*, *follower_id*, *followed_id*, *created_at*, *updated_at*
 
-2. **Install dependencies:**
-   \`\`\`bash
-   composer install
-   npm install
-   npm run dev
-   \`\`\`
+### Relationships
 
-3. **Set up the environment file:**
-   \`\`\`bash
-   cp .env.example .env
-   \`\`\`
+- **User**: A user can have many tweets, comments, likes, and followers.
+- **Tweet**: A tweet belongs to a user and can have many comments and likes.
+- **Comment**: A comment belongs to a tweet and a user.
+- **Follow**: A follow relationship connects two users (follower and followed).
 
-4. **Generate an application key:**
-   \`\`\`bash
-   php artisan key:generate
-   \`\`\`
+## API Endpoints
 
-5. **Configure the database:**
+### `GET /api/tweets`
+- **Purpose:** Retrieve all tweets from followed users.
+- **Response Body Content:**
+  - JSON array of tweet objects.
+- **Response Status Codes:**
+  - `200 OK`: Successfully retrieved tweets.
+  
+### `POST /api/tweet`
+- **Purpose:** Create a new tweet.
+- **Request Body:**
+  - `content`: The content of the tweet.
+- **Response Status Codes:**
+  - `201 Created`: Successfully created the tweet.
+  - `400 Bad Request`: Missing content.
 
-   Update the `.env` file with your database credentials.
+### `POST /api/tweet/{id}/comment`
+- **Purpose:** Post a comment on a tweet.
+- **Request Body:**
+  - `comment_text`: The content of the comment.
+- **Response Status Codes:**
+  - `201 Created`: Successfully posted the comment.
+  - `400 Bad Request`: Missing comment text.
 
-   \`\`\`env
-   DB_CONNECTION=mysql
-   DB_HOST=127.0.0.1
-   DB_PORT=3306
-   DB_DATABASE=your_database_name
-   DB_USERNAME=your_username
-   DB_PASSWORD=your_password
-   \`\`\`
+### `POST /api/tweet/{id}/like`
+- **Purpose:** Like a tweet.
+- **Response Status Codes:**
+  - `200 OK`: Successfully liked the tweet.
 
-6. **Run migrations and seed the database:**
-   \`\`\`bash
-   php artisan migrate --seed
-   \`\`\`
+### `DELETE /api/tweet/{id}/like`
+- **Purpose:** Unlike a tweet.
+- **Response Status Codes:**
+  - `200 OK`: Successfully unliked the tweet.
 
-7. **Start the development server:**
-   \`\`\`bash
+### `POST /api/follow/{username}`
+- **Purpose:** Follow or unfollow a user.
+- **Response Status Codes:**
+  - `200 OK`: Successfully followed or unfollowed the user.
+
+## Screenshots
+
+### Home Page
+![Alt text](img/homepage.png)
+
+### User Profile
+![Alt text](img/profilepage.png)
+
+### Tweet Creation
+![Alt text](img/tweetcreate.png)
+
+### Comments on Tweet
+![Alt text](img/comments.png)
+
+## User Credentials for Testing
+
+- **Username**: `user1`, **Password**: `password`
+- **Username**: `user2`, **Password**: `password`
+
+## How to Run the Project
+
+ **Clone the repository**:
+   ```bash
+   git clone https://github.com/alinhi75/Twitter-Laravel-.git
+   cd Twitter-Laravel-
+   php artisan migrate
+   php artisan db:seed
    php artisan serve
-   \`\`\`
 
-   The application will be accessible at `http://localhost:8000`.
 
-## Configuration
-
-You can configure various aspects of the project in the `.env` file. Make sure to set up the following:
-
-- **Mail Configuration:** For sending email notifications.
-- **Storage Configuration:** For storing user-uploaded files.
-
-Refer to the [Laravel documentation](https://laravel.com/docs/8.x) for more details on configuration.
-
-## Usage
-
-1. **Register an account:** Create a new user account using the registration form.
-2. **Post tweets:** Share your thoughts with others by posting tweets.
-3. **Follow users:** Follow other users to see their tweets in your timeline.
-4. **Like tweets:** Like the tweets you enjoy.
-
-## Contributing
-
-We welcome contributions from the community! If you'd like to contribute, please follow these steps:
-
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature/your-feature-name`).
-3. Make your changes and commit them (`git commit -m 'Add some feature'`).
-4. Push to the branch (`git push origin feature/your-feature-name`).
-5. Open a pull request.
-
-Please make sure your code adheres to our coding standards and includes tests where applicable.
-
-## License
-
-This project is open-source and available under the [MIT License](LICENSE).
