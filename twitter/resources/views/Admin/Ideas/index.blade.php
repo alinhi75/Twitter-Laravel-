@@ -25,8 +25,8 @@
                     <td>{{$idea->content}}</td>
                     <td>{{$idea->created_at->toDateString()}}</td>
                     <td>
-                        <a href="" class="btn btn-primary">View</a>
-                        <a href="" class="btn btn-warning">Edit</a>
+                        <a href="{{route('idea.show',$idea->id)}}" class="btn btn-primary">View</a>
+                        <a href="{{route('idea.edit',$idea->id)}}" class="btn btn-warning">Edit</a>
                         <form action="" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
