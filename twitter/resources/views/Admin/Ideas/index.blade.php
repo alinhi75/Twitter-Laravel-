@@ -25,12 +25,12 @@
                     <td>{{$idea->content}}</td>
                     <td>{{$idea->created_at->toDateString()}}</td>
                     <td>
-                        <a href="{{route('idea.show',$idea->id)}}" class="btn btn-primary">View</a>
-                        <a href="{{route('idea.edit',$idea->id)}}" class="btn btn-warning">Edit</a>
-                        <form action="" method="POST" class="d-inline">
+                        <a href="{{route('idea.show',$idea->id)}}" class="btn btn-primary btn-sm">Show</a>
+                        <a href="{{route('idea.edit',$idea->id)}}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{{ route('idea.destroy', $idea->id) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                         </form>
                     </td>
                 </tr>

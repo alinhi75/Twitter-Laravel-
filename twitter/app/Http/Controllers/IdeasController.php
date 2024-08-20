@@ -46,10 +46,16 @@ class IdeasController extends Controller
 
     public function destroy(Idea $idea){
 
+        //if the admin delete idea redirect to admin panel
+        if(auth() -> user() -> is_admin == 1){
+            $idea -> delete();
+            return redirect() -> route('admin.ideas.index') -> with ('success','Idea was deleted successfully');
+        }
 
         $this -> authorize('delete',$idea);
 
         $idea -> delete();
+
         return redirect() -> route('dashboard') -> with ('success','Idea was deleted successfully');
     }
 }
