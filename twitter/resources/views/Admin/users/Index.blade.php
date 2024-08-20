@@ -1,5 +1,5 @@
 @extends('layout.layout')
-@section('title', 'Admin Dashboard')
+@section('title', 'Users | Admin Dashboard')
 @section('content')
 <div class="row">
     <div class="col-3">

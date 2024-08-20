@@ -21,6 +21,7 @@ class Idea extends Model
         'content',
         'idea_id',
 
+
     ];
 
     protected $with = ['user:id,name,image','comments.user:id,name,image'];

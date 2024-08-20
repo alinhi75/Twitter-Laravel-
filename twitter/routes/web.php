@@ -13,6 +13,7 @@ use App\Http\Controllers\IdeaLikeController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\IdeaController as AdminIdeaController;
 
 /*
 
@@ -122,7 +123,8 @@ Route::get('lang/{lang}', function ($lang) {
 
 Route::middleware(['auth', 'can:admin'],)->prefix('admin')->as('admin.')->group(function () {
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
-    Route::get('/users', [AdminUserController::class, 'index'])->name('users');
+    Route::resource('users', AdminUserController::class)->only('index');
+    Route::resource('ideas', AdminIdeaController::class)->only('index');
 });
 
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
